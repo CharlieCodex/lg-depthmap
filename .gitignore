@@ -1,0 +1,8 @@
+mid/data/
+mid/datasets/
+checkpoint*/
+*.npz
+*.np
+__pycache__/
+hand_matt/
+.DS_Store
