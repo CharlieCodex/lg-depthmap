@@ -26,9 +26,8 @@ if latest:
 else:
     print('Error no checkpoints found')
 
-
-
 def sampler(batchsize = 10):
+    '''Generator for image input, ground truth, sample image, and discrepancy 4-tuples'''
     for epoch, x, y in minibatcher(data, batchsize=batchsize, epochs=1):
         feed_dict = {
             Xin: x,
@@ -38,6 +37,7 @@ def sampler(batchsize = 10):
         yield x, y, f, pl
 
 def slideshow():
+    '''Cycle through samples and display them one at a time in a window'''
     for x,y,f,pl in sampler():
         for i in range(x.shape[0]):
             fig, a = plt.subplots(nrows=2, ncols=2)
@@ -49,6 +49,9 @@ def slideshow():
             plt.show()
 
 def build_sample_deck():
+    '''Populates samples/ folder with images containing in their four quandrants  
+    Source | Ground Truth  
+    Predicted | Discrepancy'''
     n = 0
     out = 'samples/'
     for x,y,f,pl in sampler(batchsize=1):
